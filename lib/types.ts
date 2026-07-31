@@ -24,7 +24,7 @@ export interface Scheme {
   eligibility: string[]
   benefits: string[]
   financialAssistance: string
-  requiredDocuments: string[]
+  requiredDocuments: Document[]
   applicationDeadline: string
   targetAudience: string[]
   category: string
@@ -32,6 +32,21 @@ export interface Scheme {
   applicationUrl?: string
   contactPhone?: string
   emailId?: string
+  image?: string
+  detailedInfo?: string
+  applicationProcess?: string[]
+  faq?: FAQ[]
+}
+
+export interface Document {
+  name: string
+  description: string
+  optional?: boolean
+}
+
+export interface FAQ {
+  question: string
+  answer: string
 }
 
 export interface UserResponse {
@@ -57,4 +72,32 @@ export interface ChatMessage {
   role: 'user' | 'assistant'
   content: string
   timestamp: string
+  schemeContext?: string
+}
+
+export interface ApplicationTracker {
+  id: string
+  userId: string
+  schemeId: string
+  schemeName: string
+  status: 'submitted' | 'under_review' | 'approved' | 'rejected' | 'completed'
+  submittedDate: string
+  updatedDate: string
+  progress: number
+  documents: ApplicationDocument[]
+  notes?: string
+}
+
+export interface ApplicationDocument {
+  id: string
+  name: string
+  status: 'pending' | 'submitted' | 'verified'
+  uploadedAt?: string
+}
+
+export interface SchemeCategory {
+  id: string
+  name: string
+  description: string
+  icon: string
 }
